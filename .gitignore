@@ -1,0 +1,26 @@
+# Raw data (original CSV must not be tracked)
+data/public.csv
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments and secrets
+.env
+.env.*
+*.key
+*.pem
+secrets.yaml
+secrets.yml
+credentials.json
+
+# OS / editor noise
+.DS_Store
+.idea/
+.vscode/
