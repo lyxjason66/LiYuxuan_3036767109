@@ -1,0 +1,11 @@
+model,dependent_var,sample,key_variable,coefficient,se,residual_sd,controls_f_pvalue,n,design_full_rank,k
+(i),change in FTE,primary_357,STATE,2.325831,1.191596,8.790861,,357,yes,2
+(ii),change in FTE,primary_357,STATE,2.303860,1.195532,8.784658,0.344251,357,yes,6
+(iii),change in FTE,primary_357,GAP,15.652890,6.080237,8.756546,,357,yes,2
+(iv),change in FTE,primary_357,GAP,14.915674,6.205335,8.759209,0.437360,357,yes,6
+(v),change in FTE,primary_357,GAP,11.979237,7.419121,8.752489,0.404570,357,yes,10
+(i),change in FTE,supplementary_351,STATE,2.276858,1.190436,8.714592,,351,yes,2
+(ii),change in FTE,supplementary_351,STATE,2.281507,1.197044,8.720527,0.475244,351,yes,6
+(iii),change in FTE,supplementary_351,GAP,17.051577,6.090131,8.663387,,351,yes,2
+(iv),change in FTE,supplementary_351,GAP,16.363068,6.237251,8.680165,0.618060,351,yes,6
+(v),change in FTE,supplementary_351,GAP,13.879046,7.443950,8.669498,0.484626,351,yes,10

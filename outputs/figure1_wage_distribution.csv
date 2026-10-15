@@ -1,0 +1,57 @@
+period,state,state_name,bin_lower,bin_upper,bin_label,count,denominator,percent
+before,NJ,New Jersey,4.25,4.35,4.25,102,314,32.4841
+before,NJ,New Jersey,4.35,4.45,4.35,12,314,3.8217
+before,NJ,New Jersey,4.45,4.55,4.45,52,314,16.5605
+before,NJ,New Jersey,4.55,4.65,4.55,19,314,6.0510
+before,NJ,New Jersey,4.65,4.75,4.65,3,314,0.9554
+before,NJ,New Jersey,4.75,4.85,4.75,42,314,13.3758
+before,NJ,New Jersey,4.85,4.95,4.85,9,314,2.8662
+before,NJ,New Jersey,4.95,5.05,4.95,47,314,14.9682
+before,NJ,New Jersey,5.05,5.15,5.05,9,314,2.8662
+before,NJ,New Jersey,5.15,5.25,5.15,1,314,0.3185
+before,NJ,New Jersey,5.25,5.35,5.25,7,314,2.2293
+before,NJ,New Jersey,5.35,5.45,5.35,2,314,0.6369
+before,NJ,New Jersey,5.45,5.55,5.45,6,314,1.9108
+before,NJ,New Jersey,5.55,,>=5.55,3,314,0.9554
+before,PA,Pennsylvania,4.25,4.35,4.25,26,76,34.2105
+before,PA,Pennsylvania,4.35,4.45,4.35,1,76,1.3158
+before,PA,Pennsylvania,4.45,4.55,4.45,13,76,17.1053
+before,PA,Pennsylvania,4.55,4.65,4.55,0,76,0.0000
+before,PA,Pennsylvania,4.65,4.75,4.65,1,76,1.3158
+before,PA,Pennsylvania,4.75,4.85,4.75,10,76,13.1579
+before,PA,Pennsylvania,4.85,4.95,4.85,1,76,1.3158
+before,PA,Pennsylvania,4.95,5.05,4.95,20,76,26.3158
+before,PA,Pennsylvania,5.05,5.15,5.05,0,76,0.0000
+before,PA,Pennsylvania,5.15,5.25,5.15,0,76,0.0000
+before,PA,Pennsylvania,5.25,5.35,5.25,2,76,2.6316
+before,PA,Pennsylvania,5.35,5.45,5.35,0,76,0.0000
+before,PA,Pennsylvania,5.45,5.55,5.45,2,76,2.6316
+before,PA,Pennsylvania,5.55,,>=5.55,0,76,0.0000
+after,NJ,New Jersey,4.25,4.35,4.25,0,318,0.0000
+after,NJ,New Jersey,4.35,4.45,4.35,0,318,0.0000
+after,NJ,New Jersey,4.45,4.55,4.45,0,318,0.0000
+after,NJ,New Jersey,4.55,4.65,4.55,0,318,0.0000
+after,NJ,New Jersey,4.65,4.75,4.65,0,318,0.0000
+after,NJ,New Jersey,4.75,4.85,4.75,0,318,0.0000
+after,NJ,New Jersey,4.85,4.95,4.85,0,318,0.0000
+after,NJ,New Jersey,4.95,5.05,4.95,1,318,0.3145
+after,NJ,New Jersey,5.05,5.15,5.05,285,318,89.6226
+after,NJ,New Jersey,5.15,5.25,5.15,4,318,1.2579
+after,NJ,New Jersey,5.25,5.35,5.25,16,318,5.0314
+after,NJ,New Jersey,5.35,5.45,5.35,1,318,0.3145
+after,NJ,New Jersey,5.45,5.55,5.45,8,318,2.5157
+after,NJ,New Jersey,5.55,,>=5.55,3,318,0.9434
+after,PA,Pennsylvania,4.25,4.35,4.25,21,71,29.5775
+after,PA,Pennsylvania,4.35,4.45,4.35,5,71,7.0423
+after,PA,Pennsylvania,4.45,4.55,4.45,12,71,16.9014
+after,PA,Pennsylvania,4.55,4.65,4.55,0,71,0.0000
+after,PA,Pennsylvania,4.65,4.75,4.65,0,71,0.0000
+after,PA,Pennsylvania,4.75,4.85,4.75,14,71,19.7183
+after,PA,Pennsylvania,4.85,4.95,4.85,3,71,4.2254
+after,PA,Pennsylvania,4.95,5.05,4.95,13,71,18.3099
+after,PA,Pennsylvania,5.05,5.15,5.05,1,71,1.4085
+after,PA,Pennsylvania,5.15,5.25,5.15,0,71,0.0000
+after,PA,Pennsylvania,5.25,5.35,5.25,1,71,1.4085
+after,PA,Pennsylvania,5.35,5.45,5.35,0,71,0.0000
+after,PA,Pennsylvania,5.45,5.55,5.45,0,71,0.0000
+after,PA,Pennsylvania,5.55,,>=5.55,1,71,1.4085

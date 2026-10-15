@@ -12,7 +12,8 @@ FTE definitions:
 Operating-status rules for the after wave (STATUS2):
 
     3           permanent closure  -> after FTE = 0
-    2, 4, 5     temporary closure  -> after FTE missing
+    2, 4, 5     temporary closure  -> after FTE missing (or 0 in the
+                                      "temporary closures set to 0" variant)
     otherwise   after FTE from components (missing if any component missing)
 """
 
@@ -49,13 +50,17 @@ def compute_fte_before(row):
     return empft + nmgrs + 0.5 * emppt
 
 
-def compute_fte_after(row):
-    """Return post-treatment FTE per the STATUS2 rules, or None if missing."""
+def compute_fte_after(row, temp_closed_to_zero=False):
+    """Return post-treatment FTE per the STATUS2 rules, or None if missing.
+
+    If ``temp_closed_to_zero`` is True, temporarily closed stores
+    (STATUS2 in {2, 4, 5}) get after FTE = 0 instead of missing.
+    """
     status2 = row["STATUS2"].strip()
     if status2 == "3":
         return 0.0  # permanent closure
     if status2 in TEMPORARY_CLOSURE:
-        return None  # temporary closure
+        return 0.0 if temp_closed_to_zero else None
     empft2 = parse_float(row["EMPFT2"])
     emppt2 = parse_float(row["EMPPT2"])
     nmgrs2 = parse_float(row["NMGRS2"])
@@ -65,7 +70,9 @@ def compute_fte_after(row):
 
 
 def load_records():
-    """Return a list of dicts: {'state', 'fte_before', 'fte_after'}.
+    """Return a list of dicts with the fields needed by every script.
+
+    Keys: state, wage_st, status2, fte_before, fte_after, fte_after_temp0.
 
     Only STATE values 0 (Pennsylvania) and 1 (New Jersey) are kept.
     """
@@ -78,11 +85,20 @@ def load_records():
             state = int(state)
             if state not in STATE_LABELS:
                 continue
+
+            status2_raw = row["STATUS2"].strip()
+            status2 = int(status2_raw) if status2_raw != "" else None
+
             records.append(
                 {
                     "state": state,
+                    "wage_st": parse_float(row["WAGE_ST"]),
+                    "status2": status2,
                     "fte_before": compute_fte_before(row),
                     "fte_after": compute_fte_after(row),
+                    "fte_after_temp0": compute_fte_after(
+                        row, temp_closed_to_zero=True
+                    ),
                 }
             )
     return records
