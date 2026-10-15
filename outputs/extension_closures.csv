@@ -1,0 +1,7 @@
+sample,metric,state,n,estimate,se
+baseline,change,NJ,309,0.466667,0.480829
+baseline,change,PA,75,-2.283333,1.253269
+baseline,did,NJ-PA,,2.750000,1.342341
+excluding_permanent_closures,change,NJ,304,0.657730,0.481048
+excluding_permanent_closures,change,PA,74,-2.064189,1.250750
+excluding_permanent_closures,did,NJ-PA,,2.721919,1.340068
