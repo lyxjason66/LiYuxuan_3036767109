@@ -99,32 +99,50 @@ def make_gap(row):
     return (NEW_MIN - wage) / wage
 
 
+def qualifies_primary(row):
+    """True when the store belongs to the primary 357-store sample.
+
+    Balanced FTE AND valid wave-1 wage AND (valid wave-2 wage OR permanent
+    closure).
+    """
+    fb = card_common.compute_fte_before(row)
+    fa = card_common.compute_fte_after(row)
+    if fb is None or fa is None:
+        return False
+    w1 = card_common.parse_float(row["WAGE_ST"])
+    w2 = card_common.parse_float(row["WAGE_ST2"])
+    if w1 is None:
+        return False
+    if w2 is None and row["STATUS2"].strip() != "3":
+        return False
+    return True
+
+
+def qualifies_supplementary(row):
+    """True when the store belongs to the supplementary 351-store sample.
+
+    Balanced FTE AND valid wage in both waves (no permanent-closure exception).
+    """
+    fb = card_common.compute_fte_before(row)
+    fa = card_common.compute_fte_after(row)
+    if fb is None or fa is None:
+        return False
+    w1 = card_common.parse_float(row["WAGE_ST"])
+    w2 = card_common.parse_float(row["WAGE_ST2"])
+    if w1 is None or w2 is None:
+        return False
+    return True
+
+
 def build_sample(rows, require_w2_wage):
     """Return the regression sample.
 
-    require_w2_wage=False -> primary 357-store sample: balanced FTE AND valid
-        wave-1 wage AND (valid wave-2 wage OR permanent closure).
-    require_w2_wage=True  -> supplementary 351-store sample: balanced FTE AND
-        valid wage in both waves (no permanent-closure exception).
+    require_w2_wage=False -> primary 357-store sample (see qualifies_primary).
+    require_w2_wage=True  -> supplementary 351-store sample (see
+        qualifies_supplementary).
     """
-    recs = []
-    for row in rows:
-        fb = card_common.compute_fte_before(row)
-        fa = card_common.compute_fte_after(row)
-        if fb is None or fa is None:
-            continue
-        w1 = card_common.parse_float(row["WAGE_ST"])
-        w2 = card_common.parse_float(row["WAGE_ST2"])
-        if w1 is None:
-            continue
-        if require_w2_wage:
-            if w2 is None:
-                continue
-        else:
-            if w2 is None and row["STATUS2"].strip() != "3":
-                continue
-        recs.append(row)
-    return recs
+    predicate = qualifies_supplementary if require_w2_wage else qualifies_primary
+    return [row for row in rows if predicate(row)]
 
 
 def build_matrices(recs):

@@ -1,6 +1,9 @@
 # Raw data (original CSV must not be tracked)
 data/public.csv
 
+# Generated restaurant-level processed data (local-only; do not commit)
+data/processed/
+
 # Python caches
 __pycache__/
 *.py[cod]

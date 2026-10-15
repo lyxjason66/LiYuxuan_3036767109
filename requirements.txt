@@ -1,0 +1,9 @@
+# Direct third-party dependencies of the replication scripts.
+# Versions are pinned to the interpreter that produced the committed outputs
+# (verified against the installed environment, not guessed). Transitive
+# dependencies pulled in by statsmodels (pandas, scipy, patsy, ...) are
+# intentionally not listed.
+
+numpy==2.5.1
+matplotlib==3.11.0
+statsmodels==0.14.6
