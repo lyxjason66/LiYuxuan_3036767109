@@ -232,16 +232,16 @@ def _ind(row, col, val):
 # Reference values from the printed paper, for checking only (never used to
 # compute or force a result).
 PAPER_REF = {
-    (1, "bk"): (41.1, 44.3, None),
-    (1, "kfc"): (20.5, 15.2, None),
-    (1, "rr"): (24.8, 21.5, None),
-    (1, "wendy"): (13.6, 19.0, None),
-    (1, "co_owned"): (34.1, 35.4, None),
+    (1, "bk"): (41.1, 44.3, -0.5),
+    (1, "kfc"): (20.5, 15.2, 1.2),
+    (1, "rr"): (24.8, 21.5, 0.6),
+    (1, "wendy"): (13.6, 19.0, -1.1),
+    (1, "co_owned"): (34.1, 35.4, -0.2),
     (2, "fte"): (20.4, 23.3, -2.0),
-    (2, "pct_ft"): (32.8, 35.9, -1.0),
+    (2, "pct_ft"): (32.8, 35.0, -0.7),
     (2, "wage"): (4.61, 4.63, -0.4),
     (2, "wage_425"): (30.5, 32.9, -0.4),
-    (2, "meal"): (3.35, 3.04, 3.9),
+    (2, "meal"): (3.35, 3.04, 4.0),
     (2, "hours"): (14.4, 14.5, -0.3),
     (2, "bonus"): (23.6, 29.1, -1.0),
     (3, "fte"): (21.0, 21.2, -0.2),
@@ -487,9 +487,9 @@ def main():
         "as replicated."
     )
     md.append(
-        "- Store-type rows are reported without standard errors or t-tests in "
-        "the paper; this replication computes them for completeness, and the "
-        "proportions match the printed values exactly."
+        "- Store-type rows are reported with two-state t values but without "
+        "standard errors in the paper; this replication computes the SEs for "
+        "completeness. The proportions and t values match the printed values."
     )
     md.append("")
 

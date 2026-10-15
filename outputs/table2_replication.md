@@ -6,21 +6,21 @@ Estimates are the replication's computed values (SE in parentheses); `t` is the 
 
 | Item | NJ | PA | t | Paper NJ | Paper PA | Paper t |
 |------|----|----|---|----------|----------|---------|
-| Burger King | 41.09 (2.70) | 44.30 (5.59) | -0.5 | 41.10 | 44.30 |  |
-| KFC | 20.54 (2.22) | 15.19 (4.04) | 1.2 | 20.50 | 15.20 |  |
-| Roy Rogers | 24.77 (2.37) | 21.52 (4.62) | 0.6 | 24.80 | 21.50 |  |
-| Wendy's | 13.60 (1.88) | 18.99 (4.41) | -1.1 | 13.60 | 19.00 |  |
-| Company-owned | 34.14 (2.61) | 35.44 (5.38) | -0.2 | 34.10 | 35.40 |  |
+| Burger King | 41.09 (2.70) | 44.30 (5.59) | -0.5 | 41.10 | 44.30 | -0.5 |
+| KFC | 20.54 (2.22) | 15.19 (4.04) | 1.2 | 20.50 | 15.20 | 1.2 |
+| Roy Rogers | 24.77 (2.37) | 21.52 (4.62) | 0.6 | 24.80 | 21.50 | 0.6 |
+| Wendy's | 13.60 (1.88) | 18.99 (4.41) | -1.1 | 13.60 | 19.00 | -1.1 |
+| Company-owned | 34.14 (2.61) | 35.44 (5.38) | -0.2 | 34.10 | 35.40 | -0.2 |
 
 ## 2. Means in wave 1
 
 | Item | NJ | PA | t | Paper NJ | Paper PA | Paper t |
 |------|----|----|---|----------|----------|---------|
 | FTE employment | 20.44 (0.51) | 23.33 (1.35) | -2.0 | 20.40 | 23.30 | -2.0 |
-| % full-time employees (incl. managers) | 37.73 (1.14) | 38.76 (2.30) | -0.4 | 32.80 | 35.90 | -1.0 |
+| % full-time employees (incl. managers) | 37.73 (1.14) | 38.76 (2.30) | -0.4 | 32.80 | 35.00 | -0.7 |
 | Starting wage | 4.61 (0.02) | 4.63 (0.04) | -0.4 | 4.61 | 4.63 | -0.4 |
 | Wage = $4.25 (%, all stores) | 30.51 (2.53) | 32.91 (5.29) | -0.4 | 30.50 | 32.90 | -0.4 |
-| Price of full meal | 3.35 (0.04) | 3.04 (0.07) | 4.0 | 3.35 | 3.04 | 3.9 |
+| Price of full meal | 3.35 (0.04) | 3.04 (0.07) | 4.0 | 3.35 | 3.04 | 4.0 |
 | Hours open (weekday) | 14.42 (0.15) | 14.53 (0.33) | -0.3 | 14.40 | 14.50 | -0.3 |
 | Recruiting bonus (%) | 23.56 (2.33) | 29.11 (5.11) | -1.0 | 23.60 | 29.10 | -1.0 |
 
@@ -55,7 +55,7 @@ Estimates are the replication's computed values (SE in parentheses); `t` is the 
 
 - **`wage = X` denominators.** For 'wage = $4.25' and 'wage = $5.05' two denominators are reported -- every store in the state (missing wage treated as 'not equal to X') and valid wage records only (missing excluded) -- see the diagnostic section below. The all-stores denominator is the one that matches the paper's printed percentages, except NJ wave-2 'wage = $5.05' (see below). The original raw missing values are not modified, and the authors' original code is not claimed to have been verified.
 - **% full-time employees.** Definition unconfirmed (see above); the computed values differ from the paper's, so this row is NOT treated as replicated.
-- Store-type rows are reported without standard errors or t-tests in the paper; this replication computes them for completeness, and the proportions match the printed values exactly.
+- Store-type rows are reported with two-state t values but without standard errors in the paper; this replication computes the SEs for completeness. The proportions and t values match the printed values.
 
 ## Diagnostic: `wage = X` under two denominators
 
