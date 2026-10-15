@@ -1,0 +1,5 @@
+state,state_name,period,n,mean_fte,se_mean
+0,Pennsylvania,before,77,23.331169,1.351149
+1,New Jersey,before,321,20.439408,0.508261
+0,Pennsylvania,after,77,21.165584,0.943221
+1,New Jersey,after,319,21.027429,0.520309

@@ -1,0 +1,11 @@
+sample,state,state_name,stat,value
+all_valid,0,Pennsylvania,change,-2.1655844155844157
+all_valid,1,New Jersey,change,0.5880213673961663
+all_valid,,,did,2.753605782980582
+balanced,0,Pennsylvania,n,75
+balanced,0,Pennsylvania,mean_change,-2.283333333333333
+balanced,0,Pennsylvania,se_change,1.2532689987321888
+balanced,1,New Jersey,n,309
+balanced,1,New Jersey,mean_change,0.4666666666666666
+balanced,1,New Jersey,se_change,0.48082857143048613
+balanced,,,diff_mean_change,2.75

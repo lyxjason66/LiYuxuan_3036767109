@@ -1,88 +1,95 @@
 #!/usr/bin/env python3
-"""Replicate Card & Krueger (1994) Table 2: pre-treatment employment.
+"""Replicate Card & Krueger (1994) Table 2: FTE employment by state and wave.
 
-FTE = EMPFT + NMGRS + 0.5 * EMPPT
+Data loading, FTE construction, and operating-status rules are shared with
+the other scripts via card_common (single source of truth).
 
-If any of the three components is missing, FTE stays missing (do not
-fill with zero).  Group by STATE and report the valid sample size,
-mean FTE, and the standard error of the mean.
+FTE (before) = EMPFT + NMGRS + 0.5 * EMPPT
+FTE (after)  = EMPFT2 + NMGRS2 + 0.5 * EMPPT2
 
-STATE = 1  -> New Jersey
-STATE = 0  -> Pennsylvania
+Each wave uses only its own valid records; no balanced two-wave panel is
+imposed.  The standard error of the mean is the sample standard deviation
+divided by sqrt(n), and is reported as missing when n < 2.
 
-Uses only the Python standard library (no pandas required).
+STATE = 1 -> New Jersey
+STATE = 0 -> Pennsylvania
+
+Results are written to outputs/table2_fte_summary.csv (path is derived
+from this script's location, not the current working directory) and are
+also printed to the terminal.
 """
 
 import csv
-import math
+import os
+import sys
 
-DATA_PATH = "data/public.csv"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
 
-STATE_LABELS = {1: "New Jersey", 0: "Pennsylvania"}
+import card_common
 
+OUTPUT_DIR = os.path.join(card_common.PROJECT_ROOT, "outputs")
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, "table2_fte_summary.csv")
 
-def parse_float(value: str):
-    """Return a float for a non-empty numeric string, else None (missing)."""
-    value = value.strip()
-    if value == "":
-        return None
-    try:
-        return float(value)
-    except ValueError:
-        return None
+PERIODS = ("before", "after")
+FIELD_NAMES = ["state", "state_name", "period", "n", "mean_fte", "se_mean"]
 
 
-def main() -> None:
-    fte_by_state = {0: [], 1: []}
-    total_rows = 0
-    missing_any = 0
+def main():
+    records = card_common.load_records()
 
-    with open(DATA_PATH, newline="") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            total_rows += 1
+    fte = {"before": {0: [], 1: []}, "after": {0: [], 1: []}}
+    for rec in records:
+        if rec["fte_before"] is not None:
+            fte["before"][rec["state"]].append(rec["fte_before"])
+        if rec["fte_after"] is not None:
+            fte["after"][rec["state"]].append(rec["fte_after"])
 
-            empft = parse_float(row["EMPFT"])
-            emppt = parse_float(row["EMPPT"])
-            nmgrs = parse_float(row["NMGRS"])
+    rows = []
+    for period in PERIODS:
+        for state in (0, 1):
+            n, mean, sem = card_common.summarize(fte[period][state])
+            rows.append(
+                {
+                    "state": state,
+                    "state_name": card_common.STATE_LABELS[state],
+                    "period": period,
+                    "n": n,
+                    "mean_fte": mean,
+                    "se_mean": sem,
+                }
+            )
 
-            if empft is None or emppt is None or nmgrs is None:
-                missing_any += 1
-                continue
+    # Write CSV
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    with open(OUTPUT_PATH, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELD_NAMES)
+        writer.writeheader()
+        for r in rows:
+            writer.writerow(
+                {
+                    "state": r["state"],
+                    "state_name": r["state_name"],
+                    "period": r["period"],
+                    "n": r["n"],
+                    "mean_fte": "" if r["mean_fte"] is None else f"{r['mean_fte']:.6f}",
+                    "se_mean": "" if r["se_mean"] is None else f"{r['se_mean']:.6f}",
+                }
+            )
 
-            fte = empft + nmgrs + 0.5 * emppt
-
-            state = parse_float(row["STATE"])
-            if state is None:
-                continue
-            state = int(state)
-            if state in fte_by_state:
-                fte_by_state[state].append(fte)
-
-    print("=== Card & Krueger (1994) Table 2: pre-treatment employment ===\n")
-    print("FTE = EMPFT + NMGRS + 0.5 * EMPPT\n")
-
-    for state in (0, 1):
-        values = fte_by_state[state]
-        n = len(values)
-        if n == 0:
-            mean = sem = float("nan")
-        else:
-            mean = sum(values) / n
-            variance = sum((x - mean) ** 2 for x in values) / (n - 1)
-            sem = math.sqrt(variance / n)
-
-        label = STATE_LABELS.get(state, f"STATE={state}")
-        print(f"STATE={state} ({label})")
-        print(f"  Valid sample size (N): {n}")
-        print(f"  Mean FTE             : {mean:.4f}")
-        print(f"  Standard error (SEM) : {sem:.4f}\n")
-
-    print(f"Total rows: {total_rows}")
-    print(
-        "Rows with any of EMPFT/EMPPT/NMGRS missing: "
-        f"{missing_any}"
-    )
+    # Print to terminal
+    print("=== Card & Krueger (1994) Table 2: FTE by state and wave ===\n")
+    print(f"{'State':<12} {'Period':<8} {'N':>4}  {'Mean FTE':>10}  {'SE':>10}")
+    print("-" * 52)
+    for r in rows:
+        mean_s = "NA" if r["mean_fte"] is None else f"{r['mean_fte']:.6f}"
+        sem_s = "NA" if r["se_mean"] is None else f"{r['se_mean']:.6f}"
+        print(
+            f"{r['state_name']:<12} {r['period']:<8} "
+            f"{r['n']:>4}  {mean_s:>10}  {sem_s:>10}"
+        )
+    print(f"\nWrote {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
