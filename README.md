@@ -44,6 +44,8 @@ below.
 ├── requirements.txt            # direct third-party dependencies
 ├── README.md
 ├── DATA_DICTIONARY.md          # column definitions for public.csv
+├── report.pdf                  # final written report
+├── AI_USE.md                   # AI usage disclosure
 ├── data/
 │   ├── public.csv              # input data (NOT tracked by git)
 │   └── processed/              # local-only, git-ignored
@@ -121,3 +123,8 @@ See `outputs/validation_summary.md` for details. In brief:
 - **Figure 1 bin boundaries** — the original rule is not stated in the scan;
   the 10-cent bins are a documented replication choice (see
   `outputs/figure1_notes.md`).
+
+## Report and AI usage
+
+- [report.pdf](report.pdf) — the final written report.
+- [AI_USE.md](AI_USE.md) — AI usage disclosure.
